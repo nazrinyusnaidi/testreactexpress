@@ -4,8 +4,9 @@ This is a demo version on how to plug Express JS with NodeJS, connecting to phpm
 Pre-requisites:
 - Installed NodeJS
 - Installed XAMPP
+- Installed Postman (optional, but a great tool if you want to test your API request and response!)
 - phpmyadmin server started & running
-- Setup DB & tables
+- Setup DB credentials & tables
 
 Steps:
 1. Create a new folder, put any names you want.
