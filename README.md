@@ -6,7 +6,7 @@ Pre-requisites:
 - Installed XAMPP
 - Installed Postman (optional, but a great tool if you want to test your API request and response!)
 - phpmyadmin server started & running
-- Setup DB credentials & tables
+- Setup DB credentials & tables at phpmyadmin
 
 Steps:
 1. Create a new folder, put any names you want.
