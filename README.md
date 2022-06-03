@@ -7,6 +7,7 @@ Pre-requisites:
 - phpmyadmin server started & running
 - Setup DB & tables
 
+Steps:
 1. Create a new folder, put any names you want.
 2. Open the folder & run cmd/PowerShell inside that folder.
 3. Type "npm init -y" to initialize package.json
