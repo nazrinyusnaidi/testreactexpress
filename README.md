@@ -59,14 +59,11 @@ Steps:
 const express = require("express");
 const PORT = process.env.PORT || 8000; //your backend port number, set it any way you feel comfortable with
 const app = express();
-const tableQueryRouter = require("./src/routes/dataQuery.route");
 
 
 app.get("/api", (req, res) => {
     res.json({ message: "API test succeeded!" }); //to test whether API call is working or not at localhost:8000/api
   });
-
-app.use("/table-query", tableQueryRouter);
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
@@ -76,7 +73,9 @@ app.listen(PORT, () => {
 ```
 { "message": "API test succeeded!" }
 ```
-12. Open src/configs and create a file named db.config.js; this will contain your db connection credentials. File content will look like this:
+*NOTE: Press ctrl + C to close your backend server*
+
+12. Open src/configs and create a file named db.config.js under this folder; this will contain your db connection credentials. File content will look like this:
 ```
 const config = {
   db: {
@@ -87,4 +86,85 @@ const config = {
   }
 };
 module.exports = config;
+```
+13. Open src/services
+14. There are 3 files to be created. First, create a file named db.js; this will contain function to create mysql connection and prepare to execute mysql query
+```
+const mysql = require('mysql2/promise');
+const config = require('../configs/db.config');
+
+async function query(sql, params) {
+  const connection = await mysql.createConnection(config.db);
+  const [results, ] = await connection.execute(sql, params);
+
+  return results;
+}
+
+module.exports = {
+  query
+}
+```
+15. Go to src/utils and create a file named helper.utils.js; this will contain functions to fetch query result and return empty array if query fails/return 0 result
+```
+function emptyOrRows(rows) {
+    if (!rows) {
+      return [];
+    }
+    return rows;
+  }
+
+  module.exports = {emptyOrRows}
+```
+16. Create another file named dataQuery.services.js inside src/services folder; this contains your DB query, using functions to query the data, return result at services layer
+```
+const db = require('../services/db');
+const helper = require('../utils/helper.utils');
+const config = require('../configs/db.config');
+
+async function selectAll(){
+ const rows = await db.query(
+    'SELECT * FROM yourtable'
+  );
+  const data = helper.emptyOrRows(rows);
+
+  return {
+    data
+  }
+}
+
+async function createRow(requestBody){
+    const result = await db.query(
+      `INSERT INTO yourtable(col1, col2, col3, col4) VALUES (${requestBody.val1},${requestBody.val2},${requestBody.val3},"${requestBody.val4}")`
+    );
+  
+    let message = 'Error in creating new row';
+  
+    if (result.affectedRows) {
+      message = 'New row created successfully';
+    }
+  
+    return {message};
+  }
+
+  async function updateRow(id, requestBody){
+    const result = await db.query(
+      `UPDATE yourtable 
+      SET tableCol="${requestBody.colVal}"
+      WHERE pk_id=${id}` 
+    );
+  
+    let message = 'Error in updating table';
+  
+    if (result.affectedRows) {
+      message = 'table updated successfully';
+    }
+  
+    return {message};
+  }
+
+module.exports = {
+    selectAll,
+    createRow,
+    updateRow
+}
 ```
