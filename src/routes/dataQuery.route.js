@@ -10,10 +10,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 /* GET programming languages. */
-router.get('/', dataQuery.selectAll);
+router.get('/users', dataQuery.selectAll);
 
-router.post('/createProg', dataQuery.createRow);
+router.post('/user', dataQuery.createRow);
 
-router.put('/updateProg/:id', dataQuery.updateRow);
+router.put('/user/:id', dataQuery.updateRow);
 
 module.exports = router;
