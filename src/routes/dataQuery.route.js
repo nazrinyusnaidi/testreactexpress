@@ -4,10 +4,10 @@ const router = express.Router();
 const dataQuery = require('../controllers/dataQuery.controller');
 
 const app = express();
-
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(bodyParser.raw());
+//app.use(bodyParser.raw());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 /* GET programming languages. */
 router.get('/', dataQuery.selectAll);

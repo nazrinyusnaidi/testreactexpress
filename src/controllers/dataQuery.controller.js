@@ -9,19 +9,6 @@ const pool = require('../configs/db.config');
 //directly using db query services in controller level
 //queriesList.js only contains plain DB query statements
 async function selectAll(request, response) {
-    // var rows = {};
-    // try {
-    //   rows = res.json(await db.query(statement.select)); 
-    // } catch (err) {
-    //   console.error(`Error while getting programming languages `, err.message);
-    //   next(err);
-    // }
-
-    // const data = helper.emptyOrRows(rows);
-    
-    //   return {
-    //     data
-    //   }
     
     pool.query('SELECT * FROM users_test', (error, results) => {
       if (error) {
@@ -36,20 +23,15 @@ async function selectAll(request, response) {
   async function createRow(request, response) {
 
     const { name, email, status, device_id, platform, role, created_on, updated_on } = request.body;
+    console.log(request.body);
 
-    pool.query('INSERT INTO users_test (name, email, status, device_id, platform, role, created_on, updated_on) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *', [name, email, status, device_id, platform, role, created_on, updated_on], (error, results) => {
+    pool.query('INSERT INTO users_test (name, email, status, device_id, platform, role, created_on, updated_on) VALUES ($1, $2, $3, $4, $5, $6, current_timestamp, current_timestamp)', [name, email, status, device_id, platform, role], (error, results) => {
       if (error) {
         throw error
       }
-      response.status(201).send(`User added with ID: ${results.rows[0].id}`)
+      response.status(201).send(`User added`)
     })
-    // try {
-    //   res.json(await dataQuery.createRow(req.body)); 
-    // } catch (err) {
-    //   console.error(`Error while creating new row`, err.message);
-    //   next(err);
-    // }
-    // res.json(req.body);
+    
   }
 
   async function updateRow(request, response, next) {
@@ -58,7 +40,7 @@ async function selectAll(request, response) {
     const { name, email } = request.body
 
     pool.query(
-      'UPDATE users_test SET name = $1, email = $2 WHERE id = $3',
+      'UPDATE users_test SET name = $1, email = $2, updated_on = current_timestamp WHERE id = $3',
       [name, email, id],
       (error, results) => {
         if (error) {
