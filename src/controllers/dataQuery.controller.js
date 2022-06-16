@@ -49,18 +49,10 @@ async function selectAll(request, response) {
         response.status(200).send(`User modified with ID: ${id}`)
       }
     )
-    // try {
-    //   res.json(await tablequery.updateRow(req.params.id, req.body));
-    // } catch (err) {
-    //   console.error(`Error while updating row`, err.message);
-    //   next(err);
-    // }
+    
   }
 
   module.exports = {
-      // selectAll,
-      // createRow,
-      // updateRow 
       selectAll,
       createRow,
       updateRow       
