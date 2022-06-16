@@ -25,12 +25,19 @@ async function selectAll(request, response) {
     const { name, email, status, device_id, platform, role, created_on, updated_on } = request.body;
     console.log(request.body);
 
-    pool.query('INSERT INTO users_test (name, email, status, device_id, platform, role, created_on, updated_on) VALUES ($1, $2, $3, $4, $5, $6, current_timestamp, current_timestamp)', [name, email, status, device_id, platform, role], (error, results) => {
-      if (error) {
-        throw error
-      }
-      response.status(201).send(`User added`)
-    })
+    // pool.query('INSERT INTO users_test (name, email, status, device_id, platform, role, created_on, updated_on) VALUES ($1, $2, $3, $4, $5, $6, current_timestamp, current_timestamp)', [name, email, status, device_id, platform, role], (error, results) => {
+    //   if (error) {
+    //     //throw error.stack
+    //   }
+    //   response.status(201).send({name: name, STATUS: response.statusCode})
+      
+    // })
+    pool
+      .query('INSERT INTO users_test (name, email, status, device_id, platform, role, created_on, updated_on) VALUES ($1, $2, $3, $4, $5, $6, current_timestamp, current_timestamp)', [name, email, status, device_id, platform, role])
+      .then(response.status(201).send({name: name, STATUS: response.statusCode}))
+      .catch(err => {
+        response.status(400).send("Error, bro!");
+      })
     
   }
 
