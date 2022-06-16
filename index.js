@@ -9,11 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.raw());
 
-app.get("/api", (req, res) => {
-    res.json({ message: "API test succeeded!" });
-  });
-
-app.use("/table-query", tableQueryRouter);
+app.use("/api", tableQueryRouter);
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

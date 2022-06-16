@@ -14,6 +14,6 @@ router.get('/', dataQuery.selectAll);
 
 router.post('/createProg', dataQuery.createRow);
 
-// router.put('/updateProg/:id', dataQuery.updateRow);
+router.put('/updateProg/:id', dataQuery.updateRow);
 
 module.exports = router;
