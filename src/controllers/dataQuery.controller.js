@@ -9,6 +9,10 @@ function testUnit(a, b) {
   return a + b;
 }
 
+function testAnother() {
+
+}
+
 
 //example of router > controller > query list(see: services/queriesList.js)
 //directly using db query services in controller level
@@ -65,6 +69,7 @@ async function updateRow(request, response, next) {
 }
 
 module.exports = {
+  testAnother,
     testUnit,
     selectAll,
     createRow,
