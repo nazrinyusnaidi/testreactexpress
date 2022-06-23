@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node index.js"
+  },
+  "jest": {
+    "collectCoverage":true
   },
   "keywords": [],
   "author": "",
@@ -19,5 +22,8 @@
     "pg-promise": "^10.11.1",
     "sequelize": "^6.20.0"
   },
-  "proxy": "http://localhost:8000/"
+  "proxy": "http://localhost:8000/",
+  "devDependencies": {
+    "jest": "^28.1.1"
+  }
 }

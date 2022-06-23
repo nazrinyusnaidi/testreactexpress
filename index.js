@@ -11,6 +11,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
+app.get("/", (req, res) => {
+  res.json({ message: "ok" });
+});
 app.use("/api", tableQueryRouter);
 
 app.listen(PORT, () => {

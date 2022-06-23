@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 /* GET programming languages. */
+
 router.get('/users', dataQuery.selectAll);
 
 router.post('/user', dataQuery.createRow);
