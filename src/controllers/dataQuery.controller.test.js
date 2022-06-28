@@ -23,6 +23,10 @@ test('adds 1 + 2 to equal 3:', () => {
     expect(controller.testAnother(3)).toBe(6);
   });
 
+  test('test function with if else statement:', () => {
+    expect(controller.testIfElse(0)).toBe('Toyota');
+  });
+
 
 
 describe('API testing', () => {

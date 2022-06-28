@@ -13,6 +13,16 @@ function testAnother(n) {
   return n < 2 ? 1 : n * testAnother(n - 1);
 }
 
+function testIfElse(num) {
+  var myFunc;
+  if (num === 0) {
+    myFunc = function(theObject) {
+      return theObject.make = 'Toyota';
+    }
+  }
+}
+
+
 //const factorial = function fac(n) { return n < 2 ? 1 : n * fac(n - 1) }
 
 
@@ -71,6 +81,7 @@ async function updateRow(request, response, next) {
 }
 
 module.exports = {
+  testIfElse,
   testAnother,
     testUnit,
     selectAll,
