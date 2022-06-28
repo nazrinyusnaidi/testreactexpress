@@ -9,9 +9,11 @@ function testUnit(a, b) {
   return a + b;
 }
 
-function testAnother() {
-
+function testAnother(n) {
+  return n < 2 ? 1 : n * testAnother(n - 1);
 }
+
+//const factorial = function fac(n) { return n < 2 ? 1 : n * fac(n - 1) }
 
 
 //example of router > controller > query list(see: services/queriesList.js)

@@ -21,7 +21,8 @@
     "pg": "^8.7.3",
     "pg-promise": "^10.11.1",
     "sequelize": "^6.20.0",
-    "sinon": "^14.0.0"
+    "sinon": "^14.0.0",
+    "supertest": "^6.2.3"
   },
   "proxy": "http://localhost:8000/",
   "devDependencies": {
